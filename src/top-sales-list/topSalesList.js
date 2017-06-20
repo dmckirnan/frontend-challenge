@@ -22,17 +22,19 @@ class TopSalesList extends React.Component {
     });
   }
 
-componentDidMount() {
-  // check if retrieving new data?
-}
+  componentDidMount() {
+    // check if retrieving new data?
+  }
 
-// render method
   render() {
       return ( 
-        <section>
-          <h1>TopSalesList</h1>
-            <table>
-            
+        <section id={Styles.salesList}>
+          <title id={Styles.tableTitle}>Top Sales Item</title>
+            <table id={Styles.salesTable}>
+              <td id="itemColumn">
+              <tr className="itemRow"></tr>
+              <tr className="itemRow"></tr>
+              </td>
             </table>
         </section>
       )

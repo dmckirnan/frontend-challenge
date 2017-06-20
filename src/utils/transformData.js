@@ -2,23 +2,23 @@
 import {forEach} from 'lodash';
 
 // transform data if needed here
-const transformData = (data) => {
+const transformData = (list) => {
   const transformedObj = {};
 
-  forEach(item, (order) => {
+  forEach(list, (order) => {
     forEach(order.products, (item) => {
       if (!transformedObj[item.product_id]) {
         transformedObj[item.product_id] = {};
         transformedObj[item.product_id].count = products.order_count;
         // pass item name into formatName method and store in title property
-        transformedObj[item.product_id].title = formatName(item.name);
+        transformedObj[item.product_id]. = formatName(item.name);
         // store the result of findRevenue method and store in revenue property
         let revenue = findRevenue(item);
         transformedObj[item.product_id].revenue = revenue;
       }
       else {
         // product ID already exists in cache -- add to current order count
-        transformedObj[item.product_id] += products.order.count;
+        transformedObj[item.product_id].count += products.order.count;
         // store result of findRevenue method and add to revenue property
         let revenue = findRevenue(item);
         transformedObj[item.product_id].revenue += revenue;
@@ -34,7 +34,7 @@ const transformData = (data) => {
     forEach(obj, (item) => {
       arr.push(item);
     });
-    // sort array by order count
+    // sort array by order count (greatest to least)
     arr.sort((a, b) => {
       return b.count - a.count;
     });
@@ -43,7 +43,6 @@ const transformData = (data) => {
 
   // find revenue value to be displayed
   // Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
-
   const findRevenue = (item) => {
     let revenue = item.order_count * (item.vendor_price.value / item.order_price.scale);
     return revenue;
