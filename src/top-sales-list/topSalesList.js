@@ -31,10 +31,16 @@ class TopSalesList extends React.Component {
         <section id={Styles.salesList}>
           <title id={Styles.tableTitle}>Top Sales Item</title>
             <table id={Styles.salesTable}>
-              <td id="itemColumn">
-              <tr className="itemRow"></tr>
-              <tr className="itemRow"></tr>
+
+              <td id={Styles.tableColumn}>
+              /* table needs 10 of these rows */
+              <tr className={Styles.tableRow}>
+              <div className={Styles.rowNum}></div>
+              <div className={Styles.itemName}></div>
+              <div classNAme={Styles.itemRevenue}></div>
+              </tr>
               </td>
+
             </table>
         </section>
       )

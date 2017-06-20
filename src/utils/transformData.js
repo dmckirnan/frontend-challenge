@@ -5,7 +5,8 @@ import {forEach, Map} from 'lodash';
 const transformData = (list) => {
   const transformedObj = {};
 
-  // nested forEach for nested object from API
+  // nested forEach for nested object from API to format and make usable on front-end
+  // will sort after and return out sorted result
   forEach(list, (order) => {
     forEach(order.products, (item) => {
       if (!transformedObj[item.product_id]) {
@@ -62,7 +63,7 @@ const transformData = (list) => {
     });
     return arr;
   }
-  
+
   // sort the transformedObj
   const sorted = sortItems(transformedObj);
   // return out sorted & name formatted array of objects
