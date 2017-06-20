@@ -27,22 +27,6 @@ const transformData = (list) => {
     });
   });
 
-  // sort the transformedObj
-  const sorted = sortItems(transformedObj);
-  // Product.order_count determines list from top to bottom (greatest count at top) 
-  const sortItems = (obj) => {
-    const arr = [];
-    // iterate through obj input and push to arr
-    forEach(obj, (item) => {
-      arr.push(item);
-    });
-    // sort array by order count (greatest to least)
-    arr.sort((a, b) => {
-      return b.count - a.count;
-    });
-    return arr;
-  }
-
   // find revenue value to be displayed
   // Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
   const findRevenue = (item) => {
@@ -64,6 +48,23 @@ const transformData = (list) => {
     let proper = transformed.join(' ');
     return proper;
   }
+
+  // Product.order_count determines list from top to bottom (greatest count at top) 
+  const sortItems = (obj) => {
+    const arr = [];
+    // iterate through obj input and push to arr
+    forEach(obj, (item) => {
+      arr.push(item);
+    });
+    // sort array by order count (greatest to least)
+    arr.sort((a, b) => {
+      return b.count - a.count;
+    });
+    return arr;
+  }
+  
+  // sort the transformedObj
+  const sorted = sortItems(transformedObj);
   // return out sorted & name formatted array of objects
   return sorted;
 }
