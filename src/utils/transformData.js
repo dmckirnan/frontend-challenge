@@ -27,7 +27,6 @@ const transformData = (data) => {
   });
 
   const sorted = sortItems(transformedObj);
-
   // Product.order_count determines list from top to bottom (greatest count at top) 
   const sortItems = (obj) => {
     const arr = [];
@@ -53,9 +52,18 @@ const transformData = (data) => {
   // format name for list display
   const formatName = (item) => {
     // capitalize all first letters
-    // don't capitalize prepositions -- ex. (and)
+    let lower = item.toLowerCase();
+    let transformed = lower.split(' ');
+    transformed.map(word => {
+      // avoid capitalizing preposition 'and'
+      if (word !== 'and') return word.charAt(0).toUpperCase() + word.slice(1);
+      // if word === 'and' simply return it
+      else return word;
+    })
+    transformed.join(' ');
+    return transformed;
   }
-  // return out sorted array
+  // return out sorted, formatted array
   return sorted;
 }
 
