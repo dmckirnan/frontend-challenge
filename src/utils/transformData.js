@@ -20,7 +20,7 @@ const transformData = (list) => {
       }
       else {
         // product ID already exists in cache -- add to current order count
-        transformedObj[item.product_id].count += products.order.count;
+        transformedObj[item.product_id].count += products.order_count;
         // store result of findRevenue method and add to revenue property
         let revenue = findRevenue(item);
         transformedObj[item.product_id].revenue += revenue;
@@ -31,7 +31,7 @@ const transformData = (list) => {
   // find revenue value to be displayed
   // Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
   const findRevenue = (item) => {
-    let revenue = item.order_count * (item.vendor_price.value / item.order_price.scale);
+    let revenue = item.order_count * (item.vendor_price.value / Math.pow(10, item.order_price.scale));
     return revenue;
   }
 

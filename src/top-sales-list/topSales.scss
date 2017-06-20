@@ -1,0 +1,45 @@
+// write styles here
+$primaryFont: Roboto Lt #000000;
+$primaryPadding: 10px;
+$titleSize: 16px;
+$itemSize: 14px; 
+
+$revenueFont: Roboto Lt #CCCCCC;
+$revenueSize: 10px;
+
+$cellHeight: 44px;
+
+
+
+#salesList {
+  width: 100%
+}
+
+#tableTitle {
+  font-size: $titleSize;
+  padding-bottom: 20px;
+}
+
+#salesTable {
+  width: 100%;
+}
+
+.tableRow {
+  height: $cellHeight;
+  padding: $primaryPadding;
+}
+
+.rowNum {
+  font-size: $itemSize;
+  color: white;
+  border: 5px solid greenyellow;
+  border-radius: 8px;
+}
+
+.itemName {
+  font-size: $itemSize;
+}
+
+.itemRevenue {
+  font: $revenueFont;
+}
