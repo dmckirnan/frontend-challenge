@@ -1,17 +1,18 @@
 //feel free to use lodash; it provides alot of type methods that are native to other languages
-import {forEach} from 'lodash';
+import {forEach, Map} from 'lodash';
 
 // transform data if needed here
 const transformData = (list) => {
   const transformedObj = {};
 
+  // nested forEach for nested object from API
   forEach(list, (order) => {
     forEach(order.products, (item) => {
       if (!transformedObj[item.product_id]) {
         transformedObj[item.product_id] = {};
         transformedObj[item.product_id].count = products.order_count;
         // pass item name into formatName method and store in title property
-        transformedObj[item.product_id]. = formatName(item.name);
+        transformedObj[item.product_id].title = formatName(item.name);
         // store the result of findRevenue method and store in revenue property
         let revenue = findRevenue(item);
         transformedObj[item.product_id].revenue = revenue;
@@ -26,6 +27,7 @@ const transformData = (list) => {
     });
   });
 
+  // sort the transformedObj
   const sorted = sortItems(transformedObj);
   // Product.order_count determines list from top to bottom (greatest count at top) 
   const sortItems = (obj) => {
@@ -53,14 +55,14 @@ const transformData = (list) => {
     // capitalize all first letters
     let lower = item.toLowerCase();
     let transformed = lower.split(' ');
-    transformed.map(word => {
-      // avoid capitalizing preposition 'and'
-      if (word !== 'and') return word.charAt(0).toUpperCase() + word.slice(1);
+    // map through transformed array and uppercase each first letter
+    map(transformed, (word) => {
+      // avoid captalizing 'and'
       // if word === 'and' simply return it
-      else return word;
+      return word === 'and' ? word : word.charAt(0).toUpperCase() + word.slice(1);
     })
-    transformed.join(' ');
-    return transformed;
+    let proper = transformed.join(' ');
+    return proper;
   }
   // return out sorted & name formatted array of objects
   return sorted;
