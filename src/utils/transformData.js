@@ -63,7 +63,7 @@ const transformData = (data) => {
     transformed.join(' ');
     return transformed;
   }
-  // return out sorted, formatted array
+  // return out sorted & name formatted array of objects
   return sorted;
 }
 

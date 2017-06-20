@@ -13,12 +13,12 @@ class TopSalesList extends React.Component {
     this.state = {
       items: [],
     }
-
+    // make get request
     axios.get('http://localhost:3000/PurchaseOrders')
-    .then((data) => {
-      let newData = transformData();
+    .then((api) => {
+      let newData = transformData(api.data);
       this.state.items = newData;
-      this.setState(this.state.items);
+      this.setState(newData);
     });
   }
 
