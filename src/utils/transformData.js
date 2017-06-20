@@ -1,7 +1,62 @@
 //feel free to use lodash; it provides alot of type methods that are native to other languages
-//import {function} from 'lodash';
+import {forEach} from 'lodash';
 
-//transform data if needed here
-export default function transformData(data) {
-    return data;
-};
+// transform data if needed here
+const transformData = (data) => {
+  const transformedObj = {};
+
+  forEach(item, (order) => {
+    forEach(order.products, (item) => {
+      if (!transformedObj[item.product_id]) {
+        transformedObj[item.product_id] = {};
+        transformedObj[item.product_id].count = products.order_count;
+        // pass item name into formatName method and store in title property
+        transformedObj[item.product_id].title = formatName(item.name);
+        // store the result of findRevenue method and store in revenue property
+        let revenue = findRevenue(item);
+        transformedObj[item.product_id].revenue = revenue;
+      }
+      else {
+        // product ID already exists in cache -- add to current order count
+        transformedObj[item.product_id] += products.order.count;
+        // store result of findRevenue method and add to revenue property
+        let revenue = findRevenue(item);
+        transformedObj[item.product_id].revenue += revenue;
+      }
+    });
+  });
+
+  const sorted = sortItems(transformedObj);
+
+  // Product.order_count determines list from top to bottom (greatest count at top) 
+  const sortItems = (obj) => {
+    const arr = [];
+    // iterate through obj input and push to arr
+    forEach(obj, (item) => {
+      arr.push(item);
+    });
+    // sort array by order count
+    arr.sort((a, b) => {
+      return b.count - a.count;
+    });
+    return arr;
+  }
+
+  // find revenue value to be displayed
+  // Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
+
+  const findRevenue = (item) => {
+    let revenue = item.order_count * (item.vendor_price.value / item.order_price.scale);
+    return revenue;
+  }
+
+  // format name for list display
+  const formatName = (item) => {
+    // capitalize all first letters
+    // don't capitalize prepositions -- ex. (and)
+  }
+  // return out sorted array
+  return sorted;
+}
+
+export default transformData;

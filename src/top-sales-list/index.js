@@ -1,4 +1,4 @@
-import TopSalesList from './top_sales.component.js';
+import TopSalesList from './topSalesList.js';
 
 export default TopSalesList;
 //export component
