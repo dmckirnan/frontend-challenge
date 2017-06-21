@@ -27,6 +27,7 @@ $cellHeight: 44px;
 .tableRow {
   height: $cellHeight;
   padding: $primaryPadding;
+  border-bottom: 2px lightgray;
 }
 
 .rowNum {
