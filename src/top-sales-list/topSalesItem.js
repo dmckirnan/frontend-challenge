@@ -6,9 +6,8 @@ import Styles from './topSales.scss';
 const TopSalesItem = (props) => {
   return (
     <tr className={Styles.tableRow}>
-      <div className={Styles.rowNum}>{i + 1}</div>
-      <div className={Styles.itemName}>{props.itemName}</div>
-      <div className={Styles.itemRevenue}>{props.itemRevenue}</div>
+      <td><div className={Styles.rowNum}>{props.rowNum}</div></td>
+      <td><div className={Styles.itemName}>{props.itemName}</div><div className={Styles.itemRevenue}>{props.itemRevenue}</div></td>
     </tr>
   )
 }

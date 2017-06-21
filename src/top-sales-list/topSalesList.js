@@ -30,14 +30,17 @@ class TopSalesList extends React.Component {
       // Expecting at least 10 items at our API endpoint, but to be fault-tolerant let's verify the length and iterate as many times as necessary
       let max = this.state.items.length >= 10 ? 10 : this.state.items.length;
       for (let i = 0; i < max; i += 1) {
-        rows.push(<TopSalesItem rowNum = {i + 1} itemName = {this.state.items[i].title} itemRevenue = {this.state.items[i].revenue} />)
+        rows.push(<TopSalesItem key = {i} rowNum = {i + 1} itemName = {this.state.items[i].title} itemRevenue = {this.state.items[i].revenue} />)
       }
 
       return ( 
         <section id={Styles.salesList}>
-          <title id={Styles.tableTitle}>Top Sales Item</title>
+          <title>Top Sales Items</title>
             <table id={Styles.salesTable}>
+              <theader id={Styles.tableTitle}><h1>Top Sales Items</h1></theader>
+              <tbody>
               {rows}
+              </tbody>
             </table>
         </section>
       )

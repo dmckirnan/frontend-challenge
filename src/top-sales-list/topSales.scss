@@ -1,46 +1,64 @@
 // write styles here
-$primaryFont: Roboto Lt #000000;
-$primaryPadding: 10px;
-$titleSize: 16px;
-$itemSize: 14px; 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
 
-$revenueFont: Roboto Lt #CCCCCC;
-$revenueSize: 10px;
 
+$roboto: 'Roboto', sans-serif;
 $cellHeight: 44px;
 
-
+h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: 200;
+}
 
 #salesList {
-  width: 100%
+  width: 35%;
+  border: 1px solid #CCCCCC;
 }
 
 #tableTitle {
-  font-size: $titleSize;
-  padding-bottom: 20px;
-}
-
-#salesTable {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+  font-family: $roboto;
+  font-weight: 300px;
+  height: $cellHeight;
 }
 
 .tableRow {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background: linear-gradient(#d3d3d3, #d3d3d3) top no-repeat;
+  background-size: 90% 1px;
   height: $cellHeight;
-  padding: $primaryPadding;
-  border-bottom: 2px lightgray;
 }
 
 .rowNum {
-  font-size: $itemSize;
+  height: 34px;
+  width: 34px;
+  margin: 0 20px 0 5px;
+  display: flex;
+  align-items: center;
+  // packs number at center of circle
+  justify-content: center;
+  // ensures numbers remain in the center as screen is resized
+  text-align: center;
+  background-color: yellowgreen;
+  border-radius: $cellHeight / 2;
+  font-size: 20px;
   color: white;
-  border: 5px solid greenyellow;
-  border-radius: 8px;
 }
 
 .itemName {
-  font-size: $itemSize;
+  font-family: $roboto;
+  font-size: 14px;
+  font-weight: 300px;
 }
 
 .itemRevenue {
-  font: $revenueFont;
+  font-family: $roboto;
+  font-size: 10px;
+  font-weight: 200px;
 }

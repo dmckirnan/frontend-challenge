@@ -40535,7 +40535,7 @@ module.hot.dispose(function(){update();});}/***/},/* 27 *//***/function(module,e
 var TopSalesList=function(_React$Component){_inherits(TopSalesList,_React$Component);function TopSalesList(){_classCallCheck(this,TopSalesList);var _this=_possibleConstructorReturn(this,(TopSalesList.__proto__||Object.getPrototypeOf(TopSalesList)).call(this));_this.state={items:[]};return _this;}_createClass(TopSalesList,[{key:'componentDidMount',value:function componentDidMount(){var _this2=this;// let page load first & then re-loads with API data
 _axios2.default.get('http://localhost:3000/PurchaseOrders').then(function(api){var newData=(0,_transformData2.default)(api.data);_this2.setState({items:newData});});}},{key:'render',value:function render(){// create component TopSalesItem calls 
 var rows=[];// Expecting at least 10 items at our API endpoint, but to be fault-tolerant let's verify the length and iterate as many times as necessary
-var max=this.state.items.length>=10?10:this.state.items.length;for(var i=0;i<max;i+=1){rows.push(_react2.default.createElement(_topSalesItem2.default,{rowNum:i+1,itemName:this.state.items[i].title,itemRevenue:this.state.items[i].revenue}));}return _react2.default.createElement('section',{id:_topSales2.default.salesList},_react2.default.createElement('title',{id:_topSales2.default.tableTitle},'Top Sales Item'),_react2.default.createElement('table',{id:_topSales2.default.salesTable},rows));}}]);return TopSalesList;}(_react2.default.Component);;exports.default=TopSalesList;/***/},/* 28 *//***/function(module,exports,__webpack_require__){module.exports=__webpack_require__(29);/***/},/* 29 *//***/function(module,exports,__webpack_require__){"use strict";var utils=__webpack_require__(1);var bind=__webpack_require__(17);var Axios=__webpack_require__(31);var defaults=__webpack_require__(9);/**
+var max=this.state.items.length>=10?10:this.state.items.length;for(var i=0;i<max;i+=1){rows.push(_react2.default.createElement(_topSalesItem2.default,{key:i,rowNum:i+1,itemName:this.state.items[i].title,itemRevenue:this.state.items[i].revenue}));}return _react2.default.createElement('section',{id:_topSales2.default.salesList},_react2.default.createElement('title',null,'Top Sales Items'),_react2.default.createElement('table',{id:_topSales2.default.salesTable},_react2.default.createElement('theader',{id:_topSales2.default.tableTitle},_react2.default.createElement('h1',null,'Top Sales Items')),_react2.default.createElement('tbody',null,rows)));}}]);return TopSalesList;}(_react2.default.Component);;exports.default=TopSalesList;/***/},/* 28 *//***/function(module,exports,__webpack_require__){module.exports=__webpack_require__(29);/***/},/* 29 *//***/function(module,exports,__webpack_require__){"use strict";var utils=__webpack_require__(1);var bind=__webpack_require__(17);var Axios=__webpack_require__(31);var defaults=__webpack_require__(9);/**
  * Create an instance of Axios
  *
  * @param {Object} defaultConfig The default config for the instance
@@ -40701,26 +40701,25 @@ function nonStandardBrowserEnv(){return function isURLSameOrigin(){return true;}
  */module.exports=function spread(callback){return function wrap(arr){return callback.apply(null,arr);};};/***/},/* 46 *//***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _topSalesList=__webpack_require__(27);var _topSalesList2=_interopRequireDefault(_topSalesList);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//export component
 exports.default=_topSalesList2.default;/***/},/* 47 *//***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(25);var _react2=_interopRequireDefault(_react);var _topSales=__webpack_require__(26);var _topSales2=_interopRequireDefault(_topSales);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// create stateless dumb component TopSalesItem
 // allows for better scaling if you want to add features or multiple developers want to work upon this
-var TopSalesItem=function TopSalesItem(props){return _react2.default.createElement('tr',{className:_topSales2.default.tableRow},_react2.default.createElement('div',{className:_topSales2.default.rowNum},i+1),_react2.default.createElement('div',{className:_topSales2.default.itemName},props.itemName),_react2.default.createElement('div',{className:_topSales2.default.itemRevenue},props.itemRevenue));};exports.default=TopSalesItem;/***/},/* 48 *//***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _lodash=__webpack_require__(53);// transform data if needed here
+var TopSalesItem=function TopSalesItem(props){return _react2.default.createElement('tr',{className:_topSales2.default.tableRow},_react2.default.createElement('td',null,_react2.default.createElement('div',{className:_topSales2.default.rowNum},props.rowNum)),_react2.default.createElement('td',null,_react2.default.createElement('div',{className:_topSales2.default.itemName},props.itemName),_react2.default.createElement('div',{className:_topSales2.default.itemRevenue},props.itemRevenue)));};exports.default=TopSalesItem;/***/},/* 48 *//***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _lodash=__webpack_require__(53);// transform data if needed here
 var transformData=function transformData(list){var transformedObj={};// nested forEach for nested object from API to format and make usable on front-end
-// will sort after and return out sorted result
+// pass in only parameters that we need to minimize processing
 (0,_lodash.forEach)(list,function(_ref){var products=_ref.products;(0,_lodash.forEach)(products,function(_ref2){var product_id=_ref2.product_id,name=_ref2.name,order_count=_ref2.order_count,vendor_price=_ref2.vendor_price;if(!transformedObj[product_id]){transformedObj[product_id]={};transformedObj[product_id].count=order_count;// pass item name into formatName method and store in title property
 transformedObj[product_id].title=formatName(name);// store the result of findRevenue method and store in revenue property
 var revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue=revenue;}else{// product ID already exists in cache -- add to current order count
-transformedObj[product_id].count+=order_count;// store result of findRevenue method and add to revenue property
-var _revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue+=_revenue;}});});// sort the transformedObj
-var transformedArr=(0,_lodash.values)(transformedObj);var sorted=sortItems(transformedArr);// return out sorted & name formatted array of objects
+transformedObj[product_id].count+=order_count;// store result of findRevenue method and add to current revenue property
+var _revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue+=_revenue;}});});// plug transformedObj into lodash values method
+var transformedArr=(0,_lodash.values)(transformedObj);// take updated transformedArr that is ready to be sorted & now sort
+var sorted=sortItems(transformedArr);// return out sorted & name formatted array of objects
 return sorted;};// find revenue value to be displayed
-// Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
+// Display revenue --> Product.order_count * (Product.order_price.value / 10 ^ Product.order_price.scale)
 //feel free to use lodash; it provides alot of type methods that are native to other languages
 var findRevenue=function findRevenue(count,vendor){var revenue=count*(vendor.value/Math.pow(10,vendor.scale));return revenue;};// format name for list display
-var formatName=function formatName(item){// capitalize all first letters
-var lower=item.toLowerCase();var transformed=lower.split(' ');// map through transformed array and uppercase each first letter
-transformed.map(function(word){// avoid captalizing 'and'
-// if word === 'and' simply return it
-return word==='and'?word:word.charAt(0).toUpperCase()+word.slice(1);});var proper=transformed.join(' ');return proper;};// Product.order_count determines list from top to bottom (greatest count at top) 
-var sortItems=function sortItems(arr){// sort array by order count (greatest to least)
-arr.sort(function(a,b){return b.count-a.count;});};exports.default=transformData;/***/},/* 49 *//***/function(module,exports,__webpack_require__){"use strict";/* WEBPACK VAR INJECTION */(function(process){/**
+var formatName=function formatName(item){var transformed=item.toLowerCase().split(' ');console.log(transformed);// loop through and capitalize all first letters, avoid typically lowercased words like and & with
+for(var i=0;i<transformed.length;i+=1){if(transformed[i]!=='and'||transformed[i]!=="w/")transformed[i]=transformed[i].charAt(0).toUpperCase()+transformed[i].slice(1);}// join back into string and return
+var proper=transformed.join(' ');return proper;};var sortItems=function sortItems(arr){// sort array by revenue
+arr.sort(function(a,b){return b.revenue-a.revenue;});arr.map(function(item){// iterate through and add a dollar sign to final revenue total
+return item.revenue='$'+item.revenue;});return arr;};exports.default=transformData;/***/},/* 49 *//***/function(module,exports,__webpack_require__){"use strict";/* WEBPACK VAR INJECTION */(function(process){/**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
  *
@@ -41017,9 +41016,9 @@ if(Constructor.getDefaultProps){Constructor.defaultProps=Constructor.getDefaultP
 // initializer or constructor respectively.
 if(Constructor.getDefaultProps){Constructor.getDefaultProps.isReactClassApproved={};}if(Constructor.prototype.getInitialState){Constructor.prototype.getInitialState.isReactClassApproved={};}}_invariant(Constructor.prototype.render,'createClass(...): Class specification must implement a `render` method.');if(process.env.NODE_ENV!=='production'){warning(!Constructor.prototype.componentShouldUpdate,'%s has a method called '+'componentShouldUpdate(). Did you mean shouldComponentUpdate()? '+'The name is phrased as a question because the function is '+'expected to return a value.',spec.displayName||'A component');warning(!Constructor.prototype.componentWillRecieveProps,'%s has a method called '+'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',spec.displayName||'A component');}// Reduce time spent doing lookups by setting these on the prototype.
 for(var methodName in ReactClassInterface){if(!Constructor.prototype[methodName]){Constructor.prototype[methodName]=null;}}return Constructor;}return createClass;}module.exports=factory;/* WEBPACK VAR INJECTION */}).call(exports,__webpack_require__(0));/***/},/* 50 *//***/function(module,exports,__webpack_require__){exports=module.exports=__webpack_require__(51)();// imports
-// module
-exports.push([module.i,"#echo-component-topSales-3ATYm {\n  width: 100%; }\n\n#echo-component-topSales-2pDG3 {\n  font-size: 16px;\n  padding-bottom: 20px; }\n\n#echo-component-topSales-3E_XP {\n  width: 100%; }\n\n.echo-component-topSales-HofdZ {\n  height: 44px;\n  padding: 10px;\n  border-bottom: 2px lightgray; }\n\n.echo-component-topSales-21UQl {\n  font-size: 14px;\n  color: white;\n  border: 5px solid greenyellow;\n  border-radius: 8px; }\n\n.echo-component-topSales-1KbBL {\n  font-size: 14px; }\n\n.echo-component-topSales-2SXUQ {\n  font: Roboto Lt #CCCCCC; }\n",""]);// exports
-exports.locals={"salesList":"echo-component-topSales-3ATYm","tableTitle":"echo-component-topSales-2pDG3","salesTable":"echo-component-topSales-3E_XP","tableRow":"echo-component-topSales-HofdZ","rowNum":"echo-component-topSales-21UQl","itemName":"echo-component-topSales-1KbBL","itemRevenue":"echo-component-topSales-2SXUQ"};/***/},/* 51 *//***/function(module,exports){/*
+exports.push([module.i,"@import url(https://fonts.googleapis.com/css?family=Roboto:300);",""]);// module
+exports.push([module.i,"h1 {\n  margin: 0;\n  padding: 0;\n  font-weight: 200; }\n\n#echo-component-topSales-3ATYm {\n  width: 35%;\n  border: 1px solid #CCCCCC; }\n\n#echo-component-topSales-2pDG3 {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  font-size: 16px;\n  font-family: \"Roboto\", sans-serif;\n  font-weight: 300px;\n  height: 44px; }\n\n.echo-component-topSales-HofdZ {\n  display: flex;\n  flex-direction: row;\n  padding: 10px;\n  background: linear-gradient(#d3d3d3, #d3d3d3) top no-repeat;\n  background-size: 90% 1px;\n  height: 44px; }\n\n.echo-component-topSales-21UQl {\n  height: 34px;\n  width: 34px;\n  margin: 0 20px 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  background-color: yellowgreen;\n  border-radius: 22px;\n  font-size: 20px;\n  color: white; }\n\n.echo-component-topSales-1KbBL {\n  font-family: \"Roboto\", sans-serif;\n  font-size: 14px;\n  font-weight: 300px; }\n\n.echo-component-topSales-2SXUQ {\n  font-family: \"Roboto\", sans-serif;\n  font-size: 10px;\n  font-weight: 200px; }\n",""]);// exports
+exports.locals={"salesList":"echo-component-topSales-3ATYm","tableTitle":"echo-component-topSales-2pDG3","tableRow":"echo-component-topSales-HofdZ","rowNum":"echo-component-topSales-21UQl","itemName":"echo-component-topSales-1KbBL","itemRevenue":"echo-component-topSales-2SXUQ"};/***/},/* 51 *//***/function(module,exports){/*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */// css base code, injected by the css-loader
@@ -50926,7 +50925,7 @@ if(!module.children)module.children=[];Object.defineProperty(module,"loaded",{en
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};(function webpackUniversalModuleDefinition(root,factory){if(( false?'undefined':_typeof(exports))==='object'&&( false?'undefined':_typeof(module))==='object')module.exports=factory();else if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+/* WEBPACK VAR INJECTION */(function(console, module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};(function webpackUniversalModuleDefinition(root,factory){if(( false?'undefined':_typeof(exports))==='object'&&( false?'undefined':_typeof(module))==='object')module.exports=factory();else if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if((typeof exports==='undefined'?'undefined':_typeof(exports))==='object')exports["Utils"]=factory();else root["Utils"]=factory();})(undefined,function(){return(/******/function(modules){// webpackBootstrap
@@ -60391,24 +60390,23 @@ else if(freeModule){// Export for Node.js.
 freeExports._=_;}else{// Export to the global object.
 root._=_;}}).call(this);/* WEBPACK VAR INJECTION */}).call(exports,__webpack_require__(2),__webpack_require__(3)(module));/***/},/* 1 *//***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _lodash=__webpack_require__(0);// transform data if needed here
 var transformData=function transformData(list){var transformedObj={};// nested forEach for nested object from API to format and make usable on front-end
-// will sort after and return out sorted result
+// pass in only parameters that we need to minimize processing
 (0,_lodash.forEach)(list,function(_ref){var products=_ref.products;(0,_lodash.forEach)(products,function(_ref2){var product_id=_ref2.product_id,name=_ref2.name,order_count=_ref2.order_count,vendor_price=_ref2.vendor_price;if(!transformedObj[product_id]){transformedObj[product_id]={};transformedObj[product_id].count=order_count;// pass item name into formatName method and store in title property
 transformedObj[product_id].title=formatName(name);// store the result of findRevenue method and store in revenue property
 var revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue=revenue;}else{// product ID already exists in cache -- add to current order count
-transformedObj[product_id].count+=order_count;// store result of findRevenue method and add to revenue property
-var _revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue+=_revenue;}});});// sort the transformedObj
-var transformedArr=(0,_lodash.values)(transformedObj);var sorted=sortItems(transformedArr);// return out sorted & name formatted array of objects
+transformedObj[product_id].count+=order_count;// store result of findRevenue method and add to current revenue property
+var _revenue=findRevenue(order_count,vendor_price);transformedObj[product_id].revenue+=_revenue;}});});// plug transformedObj into lodash values method
+var transformedArr=(0,_lodash.values)(transformedObj);// take updated transformedArr that is ready to be sorted & now sort
+var sorted=sortItems(transformedArr);// return out sorted & name formatted array of objects
 return sorted;};// find revenue value to be displayed
-// Display revenue --> Product.order_count * (Product.order_price.value / Product.order_price.scale)
+// Display revenue --> Product.order_count * (Product.order_price.value / 10 ^ Product.order_price.scale)
 //feel free to use lodash; it provides alot of type methods that are native to other languages
 var findRevenue=function findRevenue(count,vendor){var revenue=count*(vendor.value/Math.pow(10,vendor.scale));return revenue;};// format name for list display
-var formatName=function formatName(item){// capitalize all first letters
-var lower=item.toLowerCase();var transformed=lower.split(' ');// map through transformed array and uppercase each first letter
-transformed.map(function(word){// avoid captalizing 'and'
-// if word === 'and' simply return it
-return word==='and'?word:word.charAt(0).toUpperCase()+word.slice(1);});var proper=transformed.join(' ');return proper;};// Product.order_count determines list from top to bottom (greatest count at top) 
-var sortItems=function sortItems(arr){// sort array by order count (greatest to least)
-arr.sort(function(a,b){return b.count-a.count;});};exports.default=transformData;/***/},/* 2 *//***/function(module,exports){var g;// This works in non-strict mode
+var formatName=function formatName(item){var transformed=item.toLowerCase().split(' ');console.log(transformed);// loop through and capitalize all first letters, avoid typically lowercased words like and & with
+for(var i=0;i<transformed.length;i+=1){if(transformed[i]!=='and'||transformed[i]!=="w/")transformed[i]=transformed[i].charAt(0).toUpperCase()+transformed[i].slice(1);}// join back into string and return
+var proper=transformed.join(' ');return proper;};var sortItems=function sortItems(arr){// sort array by revenue
+arr.sort(function(a,b){return b.revenue-a.revenue;});arr.map(function(item){// iterate through and add a dollar sign to final revenue total
+return item.revenue='$'+item.revenue;});return arr;};exports.default=transformData;/***/},/* 2 *//***/function(module,exports){var g;// This works in non-strict mode
 g=function(){return this;}();try{// This works if eval is allowed (see CSP)
 g=g||Function("return this")()||(1,eval)("this");}catch(e){// This works if the window reference is available
 if((typeof window==='undefined'?'undefined':_typeof(window))==="object")g=window;}// g can still be undefined, but nothing to do about it...
@@ -60416,7 +60414,7 @@ if((typeof window==='undefined'?'undefined':_typeof(window))==="object")g=window
 // easier to handle this case. if(!global) { ...}
 module.exports=g;/***/},/* 3 *//***/function(module,exports){module.exports=function(module){if(!module.webpackPolyfill){module.deprecate=function(){};module.paths=[];// module.parent = undefined by default
 if(!module.children)module.children=[];Object.defineProperty(module,"loaded",{enumerable:true,get:function get(){return module.l;}});Object.defineProperty(module,"id",{enumerable:true,get:function get(){return module.i;}});module.webpackPolyfill=1;}return module;};/***/}]/******/));});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(93)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(93)(module)))
 
 /***/ }),
 /* 236 */
