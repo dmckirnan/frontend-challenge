@@ -45,6 +45,7 @@ const formatName = (name) => {
   // join string back together & return
   let formatted = name.toLowerCase().split(' ').map(string => {
     if (string !== 'and') return string.charAt(0).toUpperCase() + string.slice(1);
+    else return string;
   }).join(' ');
   return formatted;
 }

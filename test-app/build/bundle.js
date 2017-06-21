@@ -40709,7 +40709,7 @@ return sorted;};// find revenue value to be displayed
 var findRevenue=function findRevenue(count,vendor){var revenue=count*(vendor.value/Math.pow(10,vendor.scale));return revenue;};// format name for list display
 var formatName=function formatName(name){// split each element, lowercase every character, map through array element & capitalize each first letter of each word
 // join string back together & return
-var formatted=name.toLowerCase().split(' ').map(function(string){if(string!=='and')return string.charAt(0).toUpperCase()+string.slice(1);}).join(' ');return formatted;};var sortItems=function sortItems(arr){// sort array by revenue (greatest to least) & then iterate through an add dollar sign to front of revenue amount
+var formatted=name.toLowerCase().split(' ').map(function(string){if(string!=='and')return string.charAt(0).toUpperCase()+string.slice(1);else return string;}).join(' ');return formatted;};var sortItems=function sortItems(arr){// sort array by revenue (greatest to least) & then iterate through an add dollar sign to front of revenue amount
 arr.sort(function(a,b){return b.revenue-a.revenue;}).map(function(item){return item.revenue='$'+item.revenue;});return arr;};exports.default=transformData;/***/},/* 49 *//***/function(module,exports,__webpack_require__){"use strict";/* WEBPACK VAR INJECTION */(function(process){/**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -60400,7 +60400,7 @@ return sorted;};// find revenue value to be displayed
 var findRevenue=function findRevenue(count,vendor){var revenue=count*(vendor.value/Math.pow(10,vendor.scale));return revenue;};// format name for list display
 var formatName=function formatName(name){// split each element, lowercase every character, map through array element & capitalize each first letter of each word
 // join string back together & return
-var formatted=name.toLowerCase().split(' ').map(function(string){if(string!=='and')return string.charAt(0).toUpperCase()+string.slice(1);}).join(' ');return formatted;};var sortItems=function sortItems(arr){// sort array by revenue (greatest to least) & then iterate through an add dollar sign to front of revenue amount
+var formatted=name.toLowerCase().split(' ').map(function(string){if(string!=='and')return string.charAt(0).toUpperCase()+string.slice(1);else return string;}).join(' ');return formatted;};var sortItems=function sortItems(arr){// sort array by revenue (greatest to least) & then iterate through an add dollar sign to front of revenue amount
 arr.sort(function(a,b){return b.revenue-a.revenue;}).map(function(item){return item.revenue='$'+item.revenue;});return arr;};exports.default=transformData;/***/},/* 2 *//***/function(module,exports){var g;// This works in non-strict mode
 g=function(){return this;}();try{// This works if eval is allowed (see CSP)
 g=g||Function("return this")()||(1,eval)("this");}catch(e){// This works if the window reference is available
