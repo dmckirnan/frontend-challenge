@@ -37,9 +37,7 @@ class TopSalesList extends React.Component {
         <section id={Styles.salesList}>
           <title id={Styles.tableTitle}>Top Sales Item</title>
             <table id={Styles.salesTable}>
-              <td id={Styles.tableColumn}>
               {rows}
-              </td>
             </table>
         </section>
       )
