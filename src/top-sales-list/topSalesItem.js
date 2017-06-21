@@ -1,8 +1,7 @@
 import React from 'react';
-import Styles from './topSales.scss';
+import Styles from './topSalesList.scss';
 
 // create stateless dumb component TopSalesItem
-// allows for better scaling if you want to add features or multiple developers want to work upon this
 const TopSalesItem = (props) => {
   return (
     <tr className={Styles.tableRow}>

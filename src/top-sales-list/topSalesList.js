@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './topSales.scss';
+import Styles from './topSalesList.scss';
 import axios from 'axios';
 import transformData from '../utils/transformData.js';
 import TopSalesItem from './topSalesItem';
@@ -27,7 +27,7 @@ class TopSalesList extends React.Component {
   render() {
       // create component TopSalesItem calls 
       const rows = [];
-      // Expecting at least 10 items at our API endpoint, but to be fault-tolerant let's verify the length and iterate as many times as necessary
+      // Expecting at least 10 items at our API endpoint, but to be fault-tolerant let's verify the length and iterate as many times as necessary if less than 10
       let max = this.state.items.length >= 10 ? 10 : this.state.items.length;
       for (let i = 0; i < max; i += 1) {
         rows.push(<TopSalesItem key = {i} rowNum = {i + 1} itemName = {this.state.items[i].title} itemRevenue = {this.state.items[i].revenue} />)
@@ -37,7 +37,7 @@ class TopSalesList extends React.Component {
         <section id={Styles.salesList}>
           <title>Top Sales Items</title>
             <table id={Styles.salesTable}>
-              <theader id={Styles.tableTitle}><h1>Top Sales Items</h1></theader>
+              <theader id={Styles.tableTitle}><div>Top Sales Items</div></theader>
               <tbody>
               {rows}
               </tbody>
